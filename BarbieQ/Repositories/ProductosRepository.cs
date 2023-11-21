@@ -6,7 +6,7 @@ namespace BarbieQ.Repositories
 {
     public class ProductosRepository : Repository<Producto>
     {
-        public ProductosRepository(BarbieAndCosmeticsContext context) : base(context)
+        public ProductosRepository(Sistem21BarbieQcosmeticsContext context) : base(context)
         {
         }
         
@@ -17,7 +17,7 @@ namespace BarbieQ.Repositories
 
         public IEnumerable<Producto>GetProductosByCategoria(int categoria)
         {
-            return Context.Producto
+            return Context.Productos
                 .Include(x => x.IdCategoriaNavigation)
                 .Where(x => x.IdCategoriaNavigation != null &&
                 x.IdCategoriaNavigation.Id
@@ -27,7 +27,7 @@ namespace BarbieQ.Repositories
 
         public Producto? GetByNombre (string nombre)
         {
-            return Context.Producto
+            return Context.Productos
                 .Include(x => x.IdCategoriaNavigation)
                 .FirstOrDefault(x => x.Nombre == nombre);
         }

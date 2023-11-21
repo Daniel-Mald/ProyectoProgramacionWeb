@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BarbieQ.Repositories;
 using BarbieQ.Models.ViewModels;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace BarbieQ.Controllers
 {

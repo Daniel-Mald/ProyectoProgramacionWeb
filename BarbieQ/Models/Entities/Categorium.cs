@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BarbieQ.Models.Entities;
 
-public partial class Categoria
+public partial class Categorium
 {
     public int Id { get; set; }
 
@@ -11,5 +11,5 @@ public partial class Categoria
 
     public string Descripcion { get; set; } = null!;
 
-    public virtual ICollection<Producto> Producto { get; set; } = new List<Producto>();
+    public virtual ICollection<Producto> Productos { get; } = new List<Producto>();
 }
