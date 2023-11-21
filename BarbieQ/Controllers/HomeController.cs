@@ -24,7 +24,7 @@ namespace BarbieQ.Controllers
         //        Productos = repository.GetProductosByCategoria(Id)
         //        .Select(x => new ProductosModel)
         //        {
-        //            Id = x.Id,
+        //            Id = x.Id,aaaa
         //            Nombre = x.Nombre ?? "",
         //            Precio = x.Precio ?? 0m
         //        })
