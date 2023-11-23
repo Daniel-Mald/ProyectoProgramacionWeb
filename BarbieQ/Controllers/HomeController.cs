@@ -15,6 +15,10 @@ namespace BarbieQ.Controllers
         {
             return View();
         }
+        public IActionResult Carrito()
+        {
+            return View();
+        }
         //public IActionResult Producto(string Id)
         //{
         //    Id = Id.Replace("-", " ");

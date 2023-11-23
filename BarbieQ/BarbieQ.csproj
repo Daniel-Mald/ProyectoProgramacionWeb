@@ -13,7 +13,6 @@
     <Folder Include="Areas\Admin\Views\" />
     <Folder Include="Areas\" />
     <Folder Include="Models\Entities\" />
-    <Folder Include="Views\Shared\" />
   </ItemGroup>
 
   <ItemGroup>
