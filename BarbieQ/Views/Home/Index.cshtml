@@ -1,4 +1,5 @@
-﻿@{
+﻿@model BarbieQ.Models.ViewModels.IndexViewModel;
+@{
     Layout = "Layout";
 
 }
@@ -13,44 +14,26 @@
 </section>
 <section class="ultimos-agregados">
     <!--Aqui el servicio se traera los ultimos 3 productos agregados-->
-    <div class="ultimos-agregados-item">
-        <div class="stack-img">
-            <img alt="x" src="~/img/productos/1.jpg" />
-            <img alt="y" src="~/img/productos/1_alternate.jpg" />
+    @foreach (var item in Model.Ultimos3Productos)
+    {
+        <div class="ultimos-agregados-item">
+            <div class="stack-img">
+                <img alt="x" src="~/img/productos/@(item.Id).jpg" />
+                <img alt="y" src="~/img/productos/@(item.Id)_alternate.jpg" />
+            </div>
+
+            <h2>@item.Nombre</h2>
+
+            <p>@item.Precio.ToString("c")</p>
+
+            <a href="~/Home/Producto/@(item.Nombre.Replace(" ","-"))" class="boton-producto">VER PRODUCTO</a>
+
+           
         </div>
+    }
+   
 
-        <h2>Nombre producto</h2>
-
-        <p>Precio producto</p>
-
-        <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-    </div>
-
-    <div class="ultimos-agregados-item">
-        <div class="stack-img">
-            <img alt="x" src="~/img/productos/1.jpg" />
-            <img alt="y" src="~/img/productos/1_alternate.jpg" />
-        </div>
-
-        <h2>Nombre producto</h2>
-
-        <p>Precio producto</p>
-
-        <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-    </div>
-
-    <div class="ultimos-agregados-item">
-        <div class="stack-img">
-            <img alt="x" src="~/img/productos/1.jpg" />
-            <img alt="y" src="~/img/productos/1_alternate.jpg" />
-        </div>
-
-        <h2>Nombre producto</h2>
-
-        <p>Precio producto</p>
-
-        <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-    </div>
+    
 </section>
 
 <section class="poster newsletter">
@@ -67,150 +50,23 @@
     <h1 class="titulo-mas-vendidos">Los favoritos de la temporada</h1>
 
     <section class="ultimos-agregados mas-vendidos">
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
+       @* siempre seran 12 *@
+        
+       @foreach (var item in Model.ProductosFavoritos)
+        {
+            <div class="ultimos-agregados-item">
+                <div class="stack-img">
+                    <img alt="x" src="~/img/productos/@(item.Id).jpg" />
+                    <img alt="y" src="~/img/productos/@(item.Id)_alternate.jpg" />
+                </div>
+
+                <h2>@item.Nombre</h2>
+
+                <p>@item.Precio.ToString("c")</p>
+
+                <a href="~/Home/Producto/@(item.Nombre.Replace(" ","-"))" class="boton-producto">VER PRODUCTO</a>
             </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
+        }
 
     </section>
 </div>
@@ -219,7 +75,7 @@
 <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
 <div class="elfsight-app-3dafe3bd-63c5-4236-8e84-cb2d6eb8f4ea instafeed" data-elfsight-app-lazy></div>
 <a href="cart.html" class="carrito">
-    <img src="/img/carrito.png">
+    <img src="~/img/carrito.png">
     <p class="carrito-items-count">2</p>
 </a>
 
