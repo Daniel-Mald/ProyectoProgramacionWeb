@@ -4,6 +4,7 @@ namespace BarbieQ.Repositories
 {
     public class Repository<T> where T : class
     {
+        //a
         public Sistem21BarbieQcosmeticsContext Context { get; }
         public Repository(Sistem21BarbieQcosmeticsContext context)
         {
