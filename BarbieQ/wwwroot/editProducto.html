@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/img/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/img/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/img/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/img/favicon/site.webmanifest" />
+    <link rel="stylesheet" href="norm.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>BarbieQ Cosmetics</title>
+
+  </head>
+
+  <body>
+    <main class="admin-cat admin-prod">
+        <div class="producto-imagenes">
+            <div class="imagen-grande">
+              <img />
+            </div>
+            <div class="lista-imagenes">
+              <div>
+                <img src="/img/productos/sin-imagen.jpg" />
+              </div>
+              <div>
+                <img src="/img/productos/sin-imagen.jpg" />
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>
+                <h1>Editar Producto</h1>
+              </div>
+              <form>
+                <label for="">Nombre del producto</label>
+                <input type="text" name="" placeholder="Nombre..." id="" />
+
+                <label>Selecciona la categoria del producto</label>
+                <select>
+                    <option selected disabled>Seleccione...</option>
+                    <option>Blush</option>
+                    <option>Blush</option>
+                    <option>Blush</option>
+                    <option>Blush</option>
+                </select>
+        
+                <label for="">Precio</label>
+                <input type="number" name="" placeholder="Precio..." id="" />
+
+                <label for="">Unidades disponibles del producto</label>
+                <input type="number" name="" placeholder="Unidades..." id="" />
+
+                <label for="">Descripcion</label>
+                <textarea wrap="soft" id="mytextarea"></textarea>
+
+                <label for="">Ingredientes</label>
+                <textarea wrap="soft"></textarea>
+        
+                <label for="">Agregue la imagen principal del producto</label>
+                <input type="file" name="" placeholder="Seleccione una imagen" id="" />
+        
+                <label for="">Agregue la imagen del modelo usando el producto</label>
+                <input type="file" name="" placeholder="Seleccione una imagen" id="" />
+
+                <p class="txt-error">Errores</p>
+        
+                <div class="cat-btns">
+                  <a class="boton-cancelar" href="~/Admin/Categorias">Cancelar</a>
+                  <input type="submit" value="Guardar" />
+                </div>
+              </form>
+          </div>
+    
+      
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          var listaImagenes = document.querySelectorAll(".lista-imagenes img");
+          var imagenGrande = document.querySelector(".imagen-grande img");
+          var imagenSeleccionada = document.querySelector(".imagen-seleccionada img");
+  
+          listaImagenes[0].classList.add("imagen-seleccionada");
+          imagenGrande.src = listaImagenes[0].src;
+  
+          listaImagenes.forEach(function (imagen) {
+            imagen.addEventListener("click", function () {
+              // Almacenar la URL actual de la imagen grande
+              imagenGrande.setAttribute("data-image", imagenGrande.src);
+  
+              // Cambiar la imagen grande
+              imagenGrande.src = imagen.src;
+  
+              // Cambiar la clase imagen-seleccionada
+              document
+                .querySelector(".imagen-seleccionada")
+                .classList.remove("imagen-seleccionada");
+              this.parentElement.classList.add("imagen-seleccionada");
+            });
+          });
+        });
+      </script>
+    </main>
+  </body>
+</html>
