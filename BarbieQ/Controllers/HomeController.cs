@@ -20,8 +20,7 @@ namespace BarbieQ.Controllers
 
         public IActionResult Index()
         {
-            var x = categoriassRepository.GetAll();
-            int v = 49;
+           
             IndexViewModel vm = new IndexViewModel()
             {
                 Ultimos3Productos = productosRepository.GetAll().Select(x => new ProductosModel
