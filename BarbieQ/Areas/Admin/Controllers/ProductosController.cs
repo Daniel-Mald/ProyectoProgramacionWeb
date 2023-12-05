@@ -123,8 +123,13 @@ namespace BarbieQ.Areas.Admin.Controllers
 
             return View(p);
         }
-        public IActionResult Editar()
+        public IActionResult Editar(int id)
         {
+            var p = _productosRepos.Get(id);
+            if (p != null)
+            {
+               
+            }
             return View();
         }
         [HttpPost]

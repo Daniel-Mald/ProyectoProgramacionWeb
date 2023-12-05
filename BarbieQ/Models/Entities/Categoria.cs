@@ -3,15 +3,13 @@ using System.Collections.Generic;
 
 namespace BarbieQ.Models.Entities;
 
-public partial class Cliente
+public partial class Categoria
 {
     public int Id { get; set; }
 
-    public string CorreoElectronico { get; set; } = null!;
-
     public string Nombre { get; set; } = null!;
 
-    public string Contrasena { get; set; } = null!;
+    public string Descripcion { get; set; } = null!;
 
-    public int Rol { get; set; }
+    public virtual ICollection<Producto> Producto { get; } = new List<Producto>();
 }

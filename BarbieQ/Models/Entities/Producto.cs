@@ -17,5 +17,7 @@ public partial class Producto
 
     public int IdCategoria { get; set; }
 
-    public virtual Categorium IdCategoriaNavigation { get; set; } = null!;
+    public string Ingredientes { get; set; } = null!;
+
+    public virtual Categoria IdCategoriaNavigation { get; set; } = null!;
 }
