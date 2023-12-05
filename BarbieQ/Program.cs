@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddTransient<Repository<Producto>>();
 builder.Services.AddTransient<Repository<Categorium>>();
+builder.Services.AddTransient<ProductosRepository>();   
 
 
 builder.Services.AddDbContext<Sistem21BarbieQcosmeticsContext>(x =>

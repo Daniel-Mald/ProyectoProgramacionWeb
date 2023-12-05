@@ -1,0 +1,94 @@
+﻿@model BarbieQ.Areas.Admin.Models.AdminAgregarProductoViewModel;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_layoutAdmin";
+}
+<main class="admin-cat admin-prod">
+    <div class="producto-imagenes">
+        <div class="imagen-grande">
+            <img />
+        </div>
+        <div class="lista-imagenes">
+            <div>
+                <img src="~/img/productos/sin-imagen.jpg" />
+            </div>
+            <div>
+                <img src="~/img/productos/sin-imagen.jpg" />
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <h1>Agregar Producto</h1>
+        </div>
+        <form asp-action="Agregar" method="post" enctype="multipart/form-data">
+            <label for="" >Nombre del producto</label>
+            <input type="text" name="Producto.Nombre" placeholder="Nombre..." id="" value="@Model.Producto.Nombre" />
+
+            <label>Selecciona la categoria del producto</label>
+            <select name="Producto.IdCategoria">
+                <option selected disabled>Seleccione...</option>
+                @foreach (var item in Model.Categorias)
+                {
+                    <option value="@item.Id">@item.Nombre</option>
+                }
+               
+                
+               
+            </select>
+
+            <label for="">Precio</label>
+            <input type="number" name="Producto.Precio" placeholder="Precio..." id="" value="@Model.Producto.Precio"/>
+
+            <label for="">Unidades disponibles del producto</label>
+            <input type="number" name="Producto.CantidadExistencia" placeholder="Unidades..." id="" value="@Model.Producto.CantidadExistencia"/>
+
+            <label for="">Descripcion</label>
+            <textarea wrap="soft" id="mytextarea" name="Producto.Descripcion" >@Model.Producto.Descripcion</textarea>
+
+            <label for="">Ingredientes</label>
+            <textarea wrap="soft" name="Producto.Ingrediente"></textarea>
+
+            <label for="">Agregue la imagen principal del producto</label>
+            <input type="file"   placeholder="Seleccione una imagen" id="" accept="image/jpeg" asp-for="ImagenPrincipal" />
+
+            <label for="">Agregue la imagen del modelo usando el producto</label>
+            <input type="file" placeholder="Seleccione una imagen" id="" accept="image/jpeg" asp-for="ImagenModelo" />
+
+            <p class="txt-error">@Html.ValidationSummary(true)</p>
+
+            <div class="cat-btns">
+                <a class="boton-cancelar" href="~/Admin/Categorias">Cancelar</a>
+                <input type="submit" value="Agregar" />
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var listaImagenes = document.querySelectorAll(".lista-imagenes img");
+            var imagenGrande = document.querySelector(".imagen-grande img");
+            var imagenSeleccionada = document.querySelector(".imagen-seleccionada img");
+
+            listaImagenes[0].classList.add("imagen-seleccionada");
+            imagenGrande.src = listaImagenes[0].src;
+
+            listaImagenes.forEach(function (imagen) {
+                imagen.addEventListener("click", function () {
+                    // Almacenar la URL actual de la imagen grande
+                    imagenGrande.setAttribute("data-image", imagenGrande.src);
+
+                    // Cambiar la imagen grande
+                    imagenGrande.src = imagen.src;
+
+                    // Cambiar la clase imagen-seleccionada
+                    document
+                        .querySelector(".imagen-seleccionada")
+                        .classList.remove("imagen-seleccionada");
+                    this.parentElement.classList.add("imagen-seleccionada");
+                });
+            });
+        });
+    </script>
+</main>

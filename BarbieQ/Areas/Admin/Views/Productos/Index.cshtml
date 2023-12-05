@@ -1,0 +1,40 @@
+﻿@model BarbieQ.Areas.Admin.Models.AdminProductoIndexViewModel;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_layoutAdmin";
+}
+<main class="crud-admin">
+    <div class="crud-admin-header">
+        <h1>Administracion de Productos</h1>
+        <a href="~/Admin/Productos/Agregar" class="boton-producto">Agregar producto</a>
+    </div>
+    <h2>Productos existentes</h2>
+    <form method="post" action="~/Admin/Productos/Index">
+        <select asp-items="@(new SelectList(Model.Categorias,"Id","Nombre"))" asp-for="IdCategoria" onchange="this.form.submit()">
+            <option selected >Seleccione una categoria</option>
+            
+        </select>
+    </form>
+   
+
+    <div class="lista-categorias lista-productos">
+        <ul>
+            @foreach (var item in Model.Productos)
+            {
+                <li>
+                    <div>
+                        <label>@($"{item.Nombre} - {item.Categoria}") </label>
+                        <a href="~/Admin/Productos/Eliminar/(@item.Id)" class="boton-producto">🗑️</a>
+                        <a href="~/Admin/Productos/Editar/(@item.Id)" class="boton-producto">✏️</a>
+                    </div>
+                </li>
+            }
+            
+
+           
+
+
+        </ul>
+    </div>
+
+</main>
