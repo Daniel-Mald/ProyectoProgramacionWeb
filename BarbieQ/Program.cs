@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddTransient<Repository<Producto>>();
-builder.Services.AddTransient<Repository<Categorium>>();
+builder.Services.AddTransient<Repository<Categoria>>();
 builder.Services.AddTransient<ProductosRepository>();   
 
 

@@ -21,9 +21,6 @@ public partial class Sistem21BarbieQcosmeticsContext : DbContext
 
     public virtual DbSet<Producto> Producto { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=sistemas19.com;database=sistem21_BarbieQCosmetics;user=sistem21_barbieqcosmetics;password=sistemas19_", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.5.20-mariadb"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

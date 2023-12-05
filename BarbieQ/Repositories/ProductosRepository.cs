@@ -17,7 +17,7 @@ namespace BarbieQ.Repositories
 
         public IEnumerable<Producto>GetProductosByCategoria(int categoria)
         {
-            return Context.Productos
+            return Context.Producto
                 .Include(x => x.IdCategoriaNavigation)
                 .Where(x => x.IdCategoriaNavigation != null &&
                 x.IdCategoriaNavigation.Id
@@ -27,7 +27,7 @@ namespace BarbieQ.Repositories
 
         public Producto? GetByNombre (string nombre)
         {
-            return Context.Productos
+            return Context.Producto
                 .Include(x => x.IdCategoriaNavigation)
                 .FirstOrDefault(x => x.Nombre == nombre);
         }

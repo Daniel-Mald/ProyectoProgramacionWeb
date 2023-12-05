@@ -9,8 +9,8 @@ namespace BarbieQ.Areas.Admin.Controllers
     public class ProductosController : Controller
     {
         ProductosRepository _productosRepos { get; }
-        Repository<Categorium> _catRepos { get; }
-        public ProductosController(ProductosRepository repos, Repository<Categorium> reposC)
+        Repository<Categoria> _catRepos { get; }
+        public ProductosController(ProductosRepository repos, Repository<Categoria> reposC)
         {
             _productosRepos = repos;
             _catRepos = reposC;

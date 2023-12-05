@@ -8,8 +8,8 @@ namespace BarbieQ.Controllers
     public class HomeController : Controller
     {
         public Repository<Producto> productosRepository { get; }
-        public Repository<Categorium> categoriassRepository { get; }
-        public HomeController(Repository<Producto> pR, Repository<Categorium> cR)
+        public Repository<Categoria> categoriassRepository { get; }
+        public HomeController(Repository<Producto> pR, Repository<Categoria> cR)
         {
             productosRepository = pR;
             categoriassRepository = cR;
