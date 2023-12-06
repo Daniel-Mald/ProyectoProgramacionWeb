@@ -9,13 +9,25 @@ namespace BarbieQ.Repositories
         public ProductosRepository(Sistem21BarbieQcosmeticsContext context) : base(context)
         {
         }
-        
-
-        
 
 
+        public override IEnumerable<Producto> GetAll()
+        {
+            return Context.Producto
+                .Include(x => x.IdCategoriaNavigation).OrderBy(x => x.Nombre);
+        }
 
-        public IEnumerable<Producto>GetProductosByCategoria(int categoria)
+        public IEnumerable<Producto> GetProductosByCategoria(string categoria)
+        {
+            return Context.Producto
+                .Include(x => x.IdCategoriaNavigation)
+                .Where(x => x.IdCategoriaNavigation != null &&
+                x.IdCategoriaNavigation.Nombre == categoria)
+                .OrderBy(x => x.Nombre);
+        }
+
+
+        public IEnumerable<Producto> GetProductosByCategoria(int categoria)
         {
             return Context.Producto
                 .Include(x => x.IdCategoriaNavigation)
@@ -25,7 +37,7 @@ namespace BarbieQ.Repositories
                 .OrderBy(x => x.Nombre);
         }
 
-        public Producto? GetByNombre (string nombre)
+        public Producto? GetByNombre(string nombre)
         {
             return Context.Producto
                 .Include(x => x.IdCategoriaNavigation)

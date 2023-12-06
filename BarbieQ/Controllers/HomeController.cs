@@ -7,9 +7,9 @@ namespace BarbieQ.Controllers
 {
     public class HomeController : Controller
     {
-        public Repository<Producto> productosRepository { get; }
+        public ProductosRepository productosRepository { get; }
         public Repository<Categoria> categoriassRepository { get; }
-        public HomeController(Repository<Producto> pR, Repository<Categoria> cR)
+        public HomeController(ProductosRepository pR, Repository<Categoria> cR)
         {
             productosRepository = pR;
             categoriassRepository = cR;
@@ -42,22 +42,42 @@ namespace BarbieQ.Controllers
         {
             return View();
         }
-        //public IActionResult Producto(string Id)
-        //{
-        //    Id = Id.Replace("-", " ");
-        //    ProductosViewModel vm = new()
-        //    {
-        //        Categoria = Id,
-        //        Productos = repository.GetProductosByCategoria(Id)
-        //        .Select(x => new ProductosModel)
-        //        {
-        //            Id = x.Id,aaaa
-        //            Nombre = x.Nombre ?? "",
-        //            Precio = x.Precio ?? 0m
-        //        })
-        //    };
-        //   return View(vm);
-        //}
-        
+        public IActionResult VerCategoria(string Id)  // Id es el nombre de la categoria
+        {
+            Id = Id.Replace("-", " ");
+            ProductosViewModel vm = new()
+            {
+                Categoria = Id,
+                Productos = productosRepository.GetProductosByCategoria(Id)
+                .Select(x => new ProductosModel
+                {
+                    Id = x.Id,
+                    Nombre = x.Nombre?? "",
+                    Precio = x.Precio
+                })
+            };
+            return View(vm);
+        }
+        public IActionResult VerProducto(string Id)
+        {
+            Id = Id.Replace("-", " ");
+            var producto = productosRepository.GetByNombre(Id);
+            if (producto == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            VerProductosViewModel vm = new()
+            {
+                Id = producto.Id,
+                Categoria = producto.IdCategoriaNavigation?.Nombre ?? "",
+                Descripcion = producto.Descripcion ?? "",
+                Precio = producto.Precio,
+                Nombre = producto.Nombre ?? ""
+            };
+            return View(vm);
+        }
     }
+
 }
+
