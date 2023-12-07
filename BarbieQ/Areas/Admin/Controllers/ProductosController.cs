@@ -1,10 +1,12 @@
 ﻿using BarbieQ.Areas.Admin.Models;
 using BarbieQ.Models.Entities;
 using BarbieQ.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BarbieQ.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Administrador, Gerente")]
     [Area("Admin")]
     public class ProductosController : Controller
     {

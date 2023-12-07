@@ -1,0 +1,31 @@
+﻿@model BarbieQ.Models.ViewModels.LoginViewModel;
+@{
+    Layout = "_layoutAdmin";
+}
+<main class="login">
+    <div class="login-img">
+        <img src="~/img/posters/loginbanner.png">
+    </div>
+    <div class="login-data">
+        <form method="post" action="~/Home/Login">
+            <h1>Ingrese sus credenciales</h1>
+            <div class="credenciales">
+                <label for="">Ingrese su usuario</label>
+                <input type="email" name="Mail" value="@Model.Mail" id="" required placeholder="Usuario...">
+
+            </div>
+            <div class="credenciales">
+                <label for="">Ingrese su contraseña</label>
+                <input type="password" name="Password" value="@Model.Password" required placeholder="Contraseña..." id="">
+
+            </div>
+
+
+            <p class="txt-error">@Html.ValidationSummary(true)</p>
+
+            <input type="submit" value="Ingresar">
+        </form>
+        
+    </div>
+
+</main>

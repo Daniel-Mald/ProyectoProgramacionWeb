@@ -1,10 +1,12 @@
 ﻿using BarbieQ.Areas.Admin.Models;
 using BarbieQ.Models.Entities;
 using BarbieQ.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BarbieQ.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Administrador, Gerente")]
     [Area("Admin")]
     public class CategoriasController : Controller
     {
@@ -26,7 +28,7 @@ namespace BarbieQ.Areas.Admin.Controllers
             
             return View(vm);
         }
-
+        [Authorize(Roles = "Administrador")]
         public IActionResult Agregar()
         {
             AdminAgregarCategoriaViewModel vm = new()
@@ -37,6 +39,7 @@ namespace BarbieQ.Areas.Admin.Controllers
             };
             return View(vm);
         }
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Agregar(AdminAgregarCategoriaViewModel vm)
         {
@@ -78,6 +81,7 @@ namespace BarbieQ.Areas.Admin.Controllers
             //Si no lo es
             return View(vm);
         }
+        [Authorize(Roles = "Administrador")]
         public IActionResult Editar(int id)
         {
             var cat = _catRepos.Get(id);
@@ -93,6 +97,7 @@ namespace BarbieQ.Areas.Admin.Controllers
            
             return View(vm);
         }
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Editar(AdminEditarCategoriaViewModel vm)
         {
@@ -124,6 +129,7 @@ namespace BarbieQ.Areas.Admin.Controllers
             }
             return View(vm);
         }
+        [Authorize(Roles = "Administrador")]
         public IActionResult Eliminar(int id)
         {
             var cat = _catRepos.GetById(id);
@@ -146,6 +152,7 @@ namespace BarbieQ.Areas.Admin.Controllers
             };
             return View(vm);
         }
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Eliminar(AdminEliminarCategoriaViewModel c)
         {
