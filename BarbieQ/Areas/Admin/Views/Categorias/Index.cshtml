@@ -1,0 +1,30 @@
+﻿@model IEnumerable<BarbieQ.Areas.Admin.Models.AdminIndexCategoriaViewModel>;
+@{
+    Layout = "_layoutAdmin";
+}
+<main class="crud-admin">
+    <div class="crud-admin-header">
+        <h1>Administracion de Categorias</h1>
+        <a href="~/Admin/Categorias/Agregar" class="boton-producto">Agregar categoria</a>
+    </div>
+    <h2>Categorias existentes</h2>
+
+    <div class="lista-categorias">
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li>
+                    <div>
+                        <label>@(item.Nombre) - @(item.NumeroDeProductos) productos</label>
+                        <a href="~/Admin/Categorias/Eliminar/@(item.Id)" class="boton-producto">🗑️</a>
+                        <a href="~/Admin/Categorias/Editar/@(item.Id)" class="boton-producto">✏️</a>
+                    </div>
+                </li>
+            }
+            
+           
+
+        </ul>
+    </div>
+
+</main>

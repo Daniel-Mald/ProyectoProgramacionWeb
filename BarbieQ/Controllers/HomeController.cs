@@ -28,7 +28,7 @@ namespace BarbieQ.Controllers
                     Id = x.Id,
                     Nombre = x.Nombre,
                     Precio = x.Precio
-                }).Take(3),
+                }).TakeLast(3),
                 ProductosFavoritos = productosRepository.GetAll().Select(x=> new ProductosModel
                 {
                     Id = x.Id,

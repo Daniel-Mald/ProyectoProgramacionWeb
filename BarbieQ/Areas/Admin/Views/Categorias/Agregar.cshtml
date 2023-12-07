@@ -1,0 +1,24 @@
+﻿@model BarbieQ.Areas.Admin.Models.AdminAgregarCategoriaViewModel
+@{
+    Layout = "_layoutAdmin";
+}
+<main class="admin-cat">
+    <div>
+        <h1>Agregar Categoria</h1>
+    </div>
+    <form method="post" action="~/Admin/Categorias/Agregar" enctype="multipart/form-data">
+        <label for="">Nombre de la categoria</label>
+        <input type="text" name="Nombre" placeholder="Nombre..." value="@Model.Nombre" id="">
+        <img alt="iconcito" class="nav-icon centrar" src="~/img/nav/bronzer.jpg" />
+        <label for="">Descripcion</label>
+        <textarea wrap="soft" name="Descripcion">@Model.Descripcion</textarea>
+        <label for="">Agregue un icono que corresponda con la categoria</label>
+        <input type="file" name="Imagen" accept="image/jpeg" placeholder="Seleccione una imagen" value="@Model.Imagen" id="">
+        <p class="txt-error">@Html.ValidationSummary(true)</p>
+
+        <div class="cat-btns">
+            <a class="boton-cancelar" href="~/Admin/Categorias/">Cancelar</a>
+            <input type="submit" value="Agregar">
+        </div>
+    </form>
+</main>

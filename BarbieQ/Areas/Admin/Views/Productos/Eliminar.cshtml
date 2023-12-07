@@ -1,0 +1,18 @@
+﻿@model BarbieQ.Models.Entities.Producto;
+@{
+    Layout = "_layoutAdmin";
+}
+<main class="admin-cat">
+    <div class="admin-cat-eliminar">
+        <h1>Eliminar producto</h1>
+        <label>¿Está seguro de eliminar el producto "@Model.Nombre"?</label>
+        @* <p class="txt-error"></p> *@
+    </div>
+    <form method="post" action="~/Admin/Productos/Eliminar">
+        <input hidden value="@Model.Id" name="Id"/>
+        <div class="cat-btns">
+            <a class="boton-cancelar" href="~/Admin/Productos">No</a>
+            <input type="submit" value="Si" />
+        </div>
+    </form>
+</main>

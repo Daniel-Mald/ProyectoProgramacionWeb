@@ -1,0 +1,25 @@
+﻿@model BarbieQ.Areas.Admin.Models.AdminEditarCategoriaViewModel;
+@{
+    Layout = "_layoutAdmin";
+}
+<main class="admin-cat">
+    <div>
+        <h1>Editar Categoria</h1>
+    </div>
+    <form method="post" action="~/Admin/Categorias/Editar" enctype="multipart/form-data">
+        <label for="">Nombre de la categoria</label>
+        <input type="text" name="Nombre" placeholder="Nombre..." id="" value="@Model.Nombre">
+        <input hidden name="Id" value="@Model.Id"/>
+        <img alt="iconcito" class="nav-icon centrar" src="~/img/nav/bronzer.jpg" />
+        <label for="">Descripcion</label>
+        <textarea wrap="soft" name="Descripcion">@Model.Descripcion</textarea>
+        <label for="">Agregue un icono que corresponda con la categoria</label>
+        <input type="file" name="Imagen" accept="image/jpeg" value="@Model.Imagen" placeholder="Seleccione una imagen" id="">
+        <p class="txt-error">@Html.ValidationSummary(true)</p>
+
+        <div class="cat-btns">
+            <a class="boton-cancelar" href="~/Admin/Categorias">Cancelar</a>
+            <input type="submit" value="Guardar">
+        </div>
+    </form>
+</main>
