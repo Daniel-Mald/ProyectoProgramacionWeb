@@ -24,8 +24,8 @@
                 <li>
                     <div>
                         <label>@($"{item.Nombre} - {item.Categoria}") </label>
-                        <a href="~/Admin/Productos/Eliminar/(@item.Id)" class="boton-producto">🗑️</a>
-                        <a href="~/Admin/Productos/Editar/(@item.Id)" class="boton-producto">✏️</a>
+                        <a href="~/Admin/Productos/Eliminar/@(item.Id)" class="boton-producto">🗑️</a>
+                        <a href="~/Admin/Productos/Editar/@(item.Id)" class="boton-producto">✏️</a>
                     </div>
                 </li>
             }

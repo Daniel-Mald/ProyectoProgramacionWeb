@@ -1,0 +1,37 @@
+﻿@model BarbieQ.Areas.Admin.Models.AdminEliminarCategoriaViewModel;
+@{
+    Layout = "_layoutAdmin";
+}
+<main class="admin-cat">
+    <div class="admin-cat-eliminar">
+        <h1>Eliminar Categoria</h1>
+        <label>¿Está seguro de eliminar la categoría "@Model.Categoria.Nombre"?</label>
+        <p class="txt-error">@Html.ValidationSummary(true)</p>
+    </div>
+    <form method="post" action="~/Admin/Categorias/Eliminar">
+        @if(Model.CantidadDeProductos > 0)
+        {
+            <p>Esta categoria tiene productos , si desea eliminarla seleccione una categoria a la cual moverlos</p>
+            <select name="IdNuevaCategoria">
+                <option selected disabled>Seleccione...</option>
+                @foreach (var item in Model.Categorias)
+                {
+                    if (item.Id != Model.Categoria.Id)
+                    {
+
+                        <option value="@item.Id">@item.Nombre</option>
+                    }
+                }
+
+
+
+            </select>
+        }
+        <input hidden name="CantidadDeProductos" value="@Model.CantidadDeProductos" />
+        <input hidden name="Categoria.Id" value="@Model.Categoria.Id"/>
+        <div class="cat-btns">
+            <a class="boton-cancelar" href="~/Admin/Categorias">No</a>
+            <input type="submit" value="Si" />
+        </div>
+    </form>
+</main>

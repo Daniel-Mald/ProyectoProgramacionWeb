@@ -1,5 +1,4 @@
 ﻿@model BarbieQ.Areas.Admin.Models.AdminAgregarProductoViewModel;
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     Layout = "_layoutAdmin";
 }
@@ -10,56 +9,65 @@
         </div>
         <div class="lista-imagenes">
             <div>
-                <img src="~/img/productos/sin-imagen.jpg" />
+                <img src="~/img/productos/@(Model.Producto.Id).jpg" />
             </div>
             <div>
-                <img src="~/img/productos/sin-imagen.jpg" />
+                <img src="~/img/productos/@(Model.Producto.Id)_alternate.jpg" />
             </div>
         </div>
     </div>
     <div>
         <div>
-            <h1>Agregar Producto</h1>
+            <h1>Editar Producto</h1>
         </div>
-        <form asp-action="Agregar" method="post" enctype="multipart/form-data">
-            <label for="" >Nombre del producto</label>
+        <form method="post" action="~/Admin/Productos/Editar" enctype="multipart/form-data">
+            <label for="">Nombre del producto</label>
             <input type="text" name="Producto.Nombre" placeholder="Nombre..." id="" value="@Model.Producto.Nombre" />
-
+            <input hidden value="@Model.Producto.Id" name="Producto.Id"/>
             <label>Selecciona la categoria del producto</label>
-            <select name="Producto.IdCategoria">
-                <option selected disabled>Seleccione...</option>
+            <select  name="Producto.IdCategoria">
                 @foreach (var item in Model.Categorias)
                 {
-                    <option value="@item.Id">@item.Nombre</option>
+                    if(item.Id == Model.Producto.IdCategoria)
+                    {
+                        <option selected value="@item.Id">
+                            @item.Nombre
+                        </option>
+                    }
+                    else
+                    {
+                        <option value="@item.Id">@item.Nombre</option>
+                    }
+
                 }
-               
                 
-               
+                
+                
             </select>
 
             <label for="">Precio</label>
-            <input type="number" name="Producto.Precio" placeholder="Precio..." id="" value="@Model.Producto.Precio"/>
+            <input type="number" name="Producto.Precio" placeholder="Precio..." id="" value="@Model.Producto.Precio" />
 
             <label for="">Unidades disponibles del producto</label>
             <input type="number" name="Producto.CantidadExistencia" placeholder="Unidades..." id="" value="@Model.Producto.CantidadExistencia"/>
 
             <label for="">Descripcion</label>
-            <textarea wrap="soft" id="mytextarea" name="Producto.Descripcion" >@Model.Producto.Descripcion</textarea>
+            <textarea wrap="soft" name="Producto.Descripcion" id="mytextarea">@Model.Producto.Descripcion</textarea>
 
             <label for="">Ingredientes</label>
             <textarea wrap="soft" name="Producto.Ingredientes">@Model.Producto.Ingredientes</textarea>
 
             <label for="">Agregue la imagen principal del producto</label>
-            <input type="file"   placeholder="Seleccione una imagen" id="" accept="image/jpeg" asp-for="ImagenPrincipal" />
+            <input type="file" name="ImagenPrincipal" value="@Model.ImagenPrincipal" accept="image/jpeg" placeholder="Seleccione una imagen" id="" />
 
             <label for="">Agregue la imagen del modelo usando el producto</label>
-            <input type="file" placeholder="Seleccione una imagen" id="" accept="image/jpeg" asp-for="ImagenModelo" />
+            <input type="file" name="ImagenModelo" value="@Model.ImagenModelo" accept="image/jpeg" placeholder="Seleccione una imagen" id="" />
 
             <p class="txt-error">@Html.ValidationSummary(true)</p>
 
             <div class="cat-btns">
-                <a class="boton-cancelar" href="~/Admin/Categorias">Cancelar</a>
-                <input type="submit" value="Agregar" />
+                <a class="boton-cancelar" href="~/Admin/Productos/Index">Cancelar</a>
+                <input type="submit" value="Guardar" />
             </div>
         </form>
     </div>
