@@ -162,6 +162,40 @@ namespace BarbieQ.Controllers
 
         #region Carrit de compras
 
+
+        [HttpPost]
+        public IActionResult CambiarCantidadArticulo([FromBody] CarritoViewModel carritoItem)
+        {
+            // Verificar si existe una cookie de carrito
+            if (Request.Cookies["ShoppingCart"] != null)
+            {
+                // Obtener el carrito desde la cookie
+                List<CarritoViewModel>? carritoItems = JsonConvert.DeserializeObject<List<CarritoViewModel>>(Request.Cookies["ShoppingCart"]);
+
+                // Verificar si el producto ya está en el carrito
+                CarritoViewModel? existingItem = carritoItems.FirstOrDefault(item => item.Id == carritoItem.Id);
+                if (existingItem != null)
+                {
+                    // Actualizar la cantidad si el producto ya está en el carrito
+                    existingItem.Cantidad = carritoItem.Cantidad;
+                }
+                // Guardar el carrito en la cookie
+                string carritoJson = JsonConvert.SerializeObject(carritoItems);
+                Response.Cookies.Append("ShoppingCart", carritoJson, new Microsoft.AspNetCore.Http.CookieOptions
+                {
+                    Expires = DateTime.Now.AddMonths(1)
+                });
+
+                var cantidadActual = carritoItems.Sum(x => x.Cantidad);
+                var totalPagar = GetTotalPagar(carritoItems);
+
+                return Ok(new { CantidadActual = cantidadActual, TotalPagar = totalPagar });
+            }
+
+            // Redirigir a la acción Index del controlador Cart para mostrar el carrito actualizado
+            return Ok();
+        }
+
         private int GetTotalCarrito()
         {
 
