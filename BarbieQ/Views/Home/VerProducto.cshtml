@@ -4,61 +4,61 @@
 }
 
 
-    <main class="producto">
-      <div class="producto-imagenes">
+<main class="producto">
+    <div class="producto-imagenes">
         <div class="imagen-grande">
-          <img />
+            <img />
         </div>
         <div class="lista-imagenes">
-          <div>
-            <img src="~/img/productos/@(Model.Id).jpg" />
-          </div>
-          <div>
-            <img src="~/img/productos/@(Model.Id)_alternate.jpg" />
-          </div>
+            <div>
+                <img src="~/img/productos/@(Model.Id).jpg" />
+            </div>
+            <div>
+                <img src="~/img/productos/@(Model.Id)_alternate.jpg" />
+            </div>
         </div>
-      </div>
+    </div>
 
-      <div class="producto-detalles">
+    <div class="producto-detalles">
         <h1>@Model.Nombre</h1>
         <p>@Model.Precio.ToString("c")</p>
-        <form method="post" action="~/Home/Carrito/">
-          <label>Cantidad</label>
-          <div>
-            <input
-              type="number"
-              placeholder="Ingresa la cantidad"
-              value="0"
-              max="@Model.CantidadEnExistencia"
-              min="0"
-              name="CantidadEnExistencia"
-              id=""
-            />
-            <input type="submit" value="AGREGAR AL CARRITO" />
-          </div>
+        <form method="post">
+
+            <input type="hidden" name="id" value="@Model.Id" />
+            <label>Cantidad</label>
+            <div>
+                <input type="number"
+                       placeholder="Ingresa la cantidad"
+                       value="1"
+                       max="@Model.CantidadEnExistencia"
+                       min="0"
+                       name="CantidadEnExistencia"
+                       id="" />
+                <input type="submit" value="AGREGAR AL CARRITO" />
+            </div>
         </form>
         <div class="producto-descripcion">
-          <h2>Descripcion del producto</h2>
-          <div>
-            @Html.Raw(Model.Descripcion)
-          </div>
+            <h2>Descripcion del producto</h2>
+            <div>
+                @Html.Raw(Model.Descripcion)
+            </div>
         </div>
         <div class="producto-ingredientes">
-          <h2>Ingredientes del producto</h2>
-          <div>
-           @Model.Ingredientes
-          </div>
+            <h2>Ingredientes del producto</h2>
+            <div>
+                @Model.Ingredientes
+            </div>
         </div>
-      </div>
-    </main>
+    </div>
+</main>
 
-    <p class="separator">&#10084;</p>
+<p class="separator">&#10084;</p>
 
-    <div class="mas-vendidos-container">
-      <h2 class="conteo-productos">Tambien te recomendamos estos ;)</h2>
+<div class="mas-vendidos-container">
+    <h2 class="conteo-productos">Tambien te recomendamos estos ;)</h2>
 
-      <section class="ultimos-agregados mas-vendidos">
-          @foreach (var item in Model.Productos)
+    <section class="ultimos-agregados mas-vendidos">
+        @foreach (var item in Model.Productos)
         {
             <div class="ultimos-agregados-item">
                 <div class="stack-img">
@@ -73,36 +73,76 @@
                 <a href="~/Home/VerProducto/@(item.Nombre.Replace(" ","-"))" class="boton-producto">VER PRODUCTO</a>
             </div>
         }
-        
-       
-      </section>
-    </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
+
+    </section>
+</div>
+
+<script>
+
+    const formCarrito = document.querySelector("FORM");
+
+    formCarrito.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const productId = formCarrito.id.value;
+        const quantity = formCarrito.CantidadEnExistencia.value;
+        const nombre = `@Model.Nombre.Replace(" ","-").ToString()`;
+        const precio = @Model.Precio;
+
+        try {
+            const response = await fetch("/Home/AgregarAlCarrito", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ Id: productId, Cantidad: quantity, NombreProducto: nombre, Precio: precio })
+            });
+
+            if (response.ok) {
+                // Manejar la respuesta del servidor si es necesario
+                
+                alert(`Se han agregado correctamente ${quantity} ${nombre.replace("-", " ").toUpperCase()} al carrito`);
+            } else {
+                console.error("Error al agregar al carrito:", response.statusText);
+            }
+        } catch (error) {
+            console.error("Error de red:", error);
+        }
+    });
+
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
         var listaImagenes = document.querySelectorAll(".lista-imagenes img");
         var imagenGrande = document.querySelector(".imagen-grande img");
         var imagenSeleccionada = document.querySelector(".imagen-seleccionada img");
+
+
 
         listaImagenes[0].classList.add("imagen-seleccionada");
         imagenGrande.src = listaImagenes[0].src;
 
         listaImagenes.forEach(function (imagen) {
-          imagen.addEventListener("click", function () {
-            // Almacenar la URL actual de la imagen grande
-            imagenGrande.setAttribute("data-image", imagenGrande.src);
+            imagen.addEventListener("click", function () {
+                // Almacenar la URL actual de la imagen grande
+                imagenGrande.setAttribute("data-image", imagenGrande.src);
 
-            // Cambiar la imagen grande
-            imagenGrande.src = imagen.src;
+                // Cambiar la imagen grande
+                imagenGrande.src = imagen.src;
 
-            // Cambiar la clase imagen-seleccionada
-            document
-              .querySelector(".imagen-seleccionada")
-              .classList.remove("imagen-seleccionada");
-            this.parentElement.classList.add("imagen-seleccionada");
-          });
+                // Cambiar la clase imagen-seleccionada
+                document
+                    .querySelector(".imagen-seleccionada")
+                    .classList.remove("imagen-seleccionada");
+                this.parentElement.classList.add("imagen-seleccionada");
+            });
         });
-      });
-    </script>
+    });
 
-   
+
+
+
+</script>
+
