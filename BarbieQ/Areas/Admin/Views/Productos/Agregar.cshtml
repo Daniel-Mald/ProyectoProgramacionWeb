@@ -4,6 +4,14 @@
     Layout = "_layoutAdmin";
 }
 <main class="admin-cat admin-prod">
+<script src="~/lib/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: 'textarea',
+        language: 'es_MX',
+        toolbar: 'undo redo | cut copy paste | bold italic | alignleft aligncenter alignright alignjustify | outdent indent'
+    });
+</script>
     <div class="producto-imagenes">
         <div class="imagen-grande">
             <img />
@@ -58,7 +66,7 @@
             <p class="txt-error">@Html.ValidationSummary(true)</p>
 
             <div class="cat-btns">
-                <a class="boton-cancelar" href="~/Admin/Categorias">Cancelar</a>
+                <a class="boton-cancelar" href="~/Admin/Productos">Cancelar</a>
                 <input type="submit" value="Agregar" />
             </div>
         </form>
