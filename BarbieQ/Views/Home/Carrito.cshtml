@@ -29,7 +29,7 @@
                                max="5"
                                min="1"
                                name="cantidad"
-                               id="" />
+                               class="cantidadArticulo" />
                     </div>
                 </form>
             </div>
@@ -45,7 +45,7 @@
 
         <div class="carrito-item-descripcion">
             <h3 id="totalProductos">Productos: @Model.TotalProductos</h3>
-            <p id="totalAPagar" >Total a pagar: @Model.TotalPagar.ToString("c")</p>
+            <p id="totalAPagar">Total a pagar: @Model.TotalPagar.ToString("c")</p>
         </div>
         <a href="" id="comprar" class="boton-producto eliminar-item">PROCEDER AL PAGO</a>
     </div>
@@ -54,73 +54,108 @@
 
 <script>
 
-    var totalProductos = document.getElementById("totalProductos");
-    var totalPagar = document.getElementById("totalAPagar");
-    var comprar = document.getElementById("comprar");
+        var totalProductos = document.getElementById("totalProductos");
+        var totalPagar = document.getElementById("totalAPagar");
+        var comprar = document.getElementById("comprar");
+      var cantidadArticulo = document.getElementsByClassName("cantidadArticulo");
 
-    comprar.addEventListener("click", async function (e) {
-        try {
-            e.preventDefault();
-            if (totalPagar.textContent == "Total a pagar: $0.00")
-            {
-                
-                alert("Nada que comprar");
-                return;
-            }
-
-            const response = await fetch("/Home/Comprar", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-
-            if (response.ok) {
-                const resultado = await response.json();
-                window.location.replace("/home/index");
-            } else {
-                console.error("Error al realizar la compra:", response.statusText);
-            }
-        } catch (error) {
-            console.error("Error de red:", error);
-        }
-    });
+    for (var i = 0; i < cantidadArticulo.length; i++) {
+        cantidadArticulo[i].addEventListener("change", async function(e) {
+            var cantidadACambiar = e.target.value;
+            var idArticulo = e.target.parentElement.parentElement.parentElement.parentElement.querySelector(".id").value;;
+            
 
 
-    document.body.addEventListener("click", async function (e) {
-        var target = e.target;
-        if (target.tagName == "A") {
-            var id = target.parentElement.querySelector(".id").value;
 
             try {
-                const response = await fetch(`/Home/EliminarDelCarrito?productId=${id}`, {
+                const response = await fetch("/Home/CambiarCantidadArticulo", {
                     method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ Id: idArticulo, Cantidad: cantidadACambiar })
                 });
 
                 if (response.ok) {
                     // Manejar la respuesta del servidor si es necesario
 
-                    let actual = await response.json();     
+                    let actual = await response.json();
                     console.log(actual);
                     totalProductos.textContent = "Productos: " + actual.cantidadActual;
                     totalPagar.textContent = "Total a pagar: " + parseFloat(actual.totalPagar).toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
-
-
-
-                    target.parentElement.remove();
-
-
-                    
-
-                    // Actualizar la interfaz de usuario si es necesario
                 } else {
-                    console.error("Error al eliminar del carrito:", response.statusText);
+                    console.error("Error al cambiar el articulo del carrito:", response.statusText);
                 }
             } catch (error) {
                 console.error("Error de red:", error);
             }
-        }
-    });
+        });
+    }
+
+
+        comprar.addEventListener("click", async function (e) {
+            try {
+                e.preventDefault();
+                if (totalPagar.textContent == "Total a pagar: $0.00")
+                {
+
+                    alert("Nada que comprar");
+                    return;
+                }
+
+                const response = await fetch("/Home/Comprar", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+
+                if (response.ok) {
+                    const resultado = await response.json();
+                    window.location.replace("/home/index");
+                } else {
+                    console.error("Error al realizar la compra:", response.statusText);
+                }
+            } catch (error) {
+                console.error("Error de red:", error);
+            }
+        });
+
+
+        document.body.addEventListener("click", async function (e) {
+            var target = e.target;
+            if (target.tagName == "A") {
+                var id = target.parentElement.querySelector(".id").value;
+
+                try {
+                    const response = await fetch(`/Home/EliminarDelCarrito?productId=${id}`, {
+                        method: "POST",
+                    });
+
+                    if (response.ok) {
+                        // Manejar la respuesta del servidor si es necesario
+
+                        let actual = await response.json();
+                        console.log(actual);
+                        totalProductos.textContent = "Productos: " + actual.cantidadActual;
+                        totalPagar.textContent = "Total a pagar: " + parseFloat(actual.totalPagar).toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
+
+
+
+                        target.parentElement.remove();
+
+
+
+
+                        // Actualizar la interfaz de usuario si es necesario
+                    } else {
+                        console.error("Error al eliminar del carrito:", response.statusText);
+                    }
+                } catch (error) {
+                    console.error("Error de red:", error);
+                }
+            }
+        });
 
 </script>
 
