@@ -214,6 +214,36 @@ namespace BarbieQ.Controllers
         }
 
 
+
+        [HttpPost]
+        public IActionResult Comprar()
+        {
+            // Verificar si existe una cookie de carrito
+            if (Request.Cookies["ShoppingCart"] != null)
+            {
+                // Obtener el carrito desde la cookie
+                List<CarritoViewModel>? carritoItems = JsonConvert.DeserializeObject<List<CarritoViewModel>>(Request.Cookies["ShoppingCart"]);
+
+                // Limpiar la lista eliminando todos los elementos
+                carritoItems.Clear();
+
+                // Guardar la lista vacía en la cookie
+                string carritoJson = JsonConvert.SerializeObject(carritoItems);
+                Response.Cookies.Append("ShoppingCart", carritoJson, new Microsoft.AspNetCore.Http.CookieOptions
+                {
+                    Expires = DateTime.Now.AddMonths(1)
+                });
+
+                // Devolver un objeto indicando que la lista ha sido eliminada
+                return Ok(new { ListaEliminada = true });
+            }
+
+            // Devolver un error si no hay cookie de carrito
+            return BadRequest("No se encontró el carrito");
+        }
+
+
+
         [HttpPost]
         public IActionResult AgregarAlCarrito([FromBody] CarritoViewModel carritoItem)
         {

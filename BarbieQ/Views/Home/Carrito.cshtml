@@ -47,7 +47,7 @@
             <h3 id="totalProductos">Productos: @Model.TotalProductos</h3>
             <p id="totalAPagar" >Total a pagar: @Model.TotalPagar.ToString("c")</p>
         </div>
-        <a href="" class="boton-producto eliminar-item">PROCEDER AL PAGO</a>
+        <a href="" id="comprar" class="boton-producto eliminar-item">PROCEDER AL PAGO</a>
     </div>
 
 </main>
@@ -56,6 +56,35 @@
 
     var totalProductos = document.getElementById("totalProductos");
     var totalPagar = document.getElementById("totalAPagar");
+    var comprar = document.getElementById("comprar");
+
+    comprar.addEventListener("click", async function (e) {
+        try {
+            e.preventDefault();
+            if (totalPagar.textContent == "Total a pagar: $0.00")
+            {
+                
+                alert("Nada que comprar");
+                return;
+            }
+
+            const response = await fetch("/Home/Comprar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (response.ok) {
+                const resultado = await response.json();
+                window.location.replace("/home/index");
+            } else {
+                console.error("Error al realizar la compra:", response.statusText);
+            }
+        } catch (error) {
+            console.error("Error de red:", error);
+        }
+    });
 
 
     document.body.addEventListener("click", async function (e) {
