@@ -1,11 +1,10 @@
-﻿
-
+﻿@model BarbieQ.Models.ViewModels.CategoriaViewModel;
 @{
     Layout = "Layout";
 }
 
 
-<p class="disclaimer">Envio gratis en pedidos arriba de $500 pesos</p>
+@* <p class="disclaimer">Envio gratis en pedidos arriba de $500 pesos</p>
 <nav>
     <a href="/categoria.html">
         <img alt="iconcito" class="nav-icon" src="/img/nav/blush.jpg" />
@@ -27,166 +26,39 @@
         <img alt="iconcito" class="nav-icon" src="/img/nav/labios.jpg" />
         <p>Labios</p>
     </a>
-</nav>
+</nav> *@
 
 <section class="poster ">
-    <img alt="poster" src="/img/posters/banner1.jpg" />
+    <img alt="poster" src="~/img/posters/banner1.jpg" />
     <div>
-        <h1>Blush!!</h1>
-        <p>Ya sea el aspecto "sin maquillaje", el soft glam o el aspecto editorial, ¡tienes que probar el BarbieQ blush!</p>
+        <h1>@Model.Nombre !!</h1>
+        <p>@Model.Descripcion</p>
     </div>
 </section>
 
 <div class="mas-vendidos-container">
 
     <section class="ultimos-agregados mas-vendidos">
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
+        @foreach (var item in Model.Productos)
+        {
+            <div class="ultimos-agregados-item">
+                <div class="stack-img">
+                    <img alt="x" src="~/img/productos/@(item.Id).jpg" />
+                    <img alt="y" src="~/img/productos/@(item.Id)_alternate.jpg" />
+                </div>
+
+                <h2>@item.Nombre</h2>
+
+                <p>@item.Precio</p>
+
+                <a href="~/Home/VerProducto/@(item.Nombre.Replace(" ","-"))" class="boton-producto">VER PRODUCTO</a>
             </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
-        <div class="ultimos-agregados-item">
-            <div class="stack-img">
-                <img alt="x" src="/img/productos/1.jpg" />
-                <img alt="y" src="/img/productos/1_alternate.jpg" />
-            </div>
-
-            <h2>Nombre producto</h2>
-
-            <p>Precio producto</p>
-
-            <a href="/producto.html" class="boton-producto">VER PRODUCTO</a>
-        </div>
+        }
+       
+        
 
     </section>
 </div>
 
-<p class="conteo-productos">Estas viendo los 30 productos de la categoria de Blush.</p>
+<p class="conteo-productos">Estas viendo los @(Model.CantidadProductos) productos de la categoria de @(Model.Nombre).</p>
 

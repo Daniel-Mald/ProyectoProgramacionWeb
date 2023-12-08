@@ -13,9 +13,9 @@ namespace BarbieQ.Controllers
     public class HomeController : Controller
     {
         public ProductosRepository productosRepository { get; }
-        public Repository<Categoria> categoriassRepository { get; }
+        public CategoriaRepository categoriassRepository { get; }
         public Repository<Cliente> _clienteRepos { get; }
-        public HomeController(ProductosRepository pR, Repository<Categoria> cR , Repository<Cliente> clR)
+        public HomeController(ProductosRepository pR, CategoriaRepository cR , Repository<Cliente> clR)
         {
             productosRepository = pR;
             categoriassRepository = cR;
@@ -52,16 +52,20 @@ namespace BarbieQ.Controllers
         public IActionResult VerCategoria(string Id)  // Id es el nombre de la categoria
         {
             Id = Id.Replace("-", " ");
-            ProductosViewModel vm = new()
+            var cat = categoriassRepository.GetByNombre(Id);
+            if(cat == null) { return RedirectToAction("Index"); }   
+            CategoriaViewModel vm = new()
             {
-                Categoria = Id,
-                Productos = productosRepository.GetProductosByCategoria(Id)
-                .Select(x => new ProductosModel
+                Nombre = cat.Nombre,
+                Descripcion = cat.Descripcion,
+                Id= cat.Id,
+                CantidadProductos = cat.Producto.Count,
+                Productos = cat.Producto.Select(x=> new ProductosModel
                 {
                     Id = x.Id,
-                    Nombre = x.Nombre?? "",
+                    Nombre = x.Nombre,
                     Precio = x.Precio
-                })
+                }).OrderBy(x=>x.Nombre)
             };
             return View(vm);
         }
@@ -77,10 +81,18 @@ namespace BarbieQ.Controllers
             VerProductosViewModel vm = new()
             {
                 Id = producto.Id,
-                Categoria = producto.IdCategoriaNavigation?.Nombre ?? "",
+                Ingredientes = producto.Ingredientes,
+                CantidadEnExistencia = producto.CantidadExistencia!= null?(int)producto.CantidadExistencia:0,
+                //Categoria = producto.IdCategoriaNavigation?.Nombre ?? "",
                 Descripcion = producto.Descripcion ?? "",
                 Precio = producto.Precio,
-                Nombre = producto.Nombre ?? ""
+                Nombre = producto.Nombre ?? "",
+                Productos = productosRepository.GetAll().Select(x=> new ProductosModel
+                {
+                    Id = x.Id,
+                    Nombre = x.Nombre,
+                    Precio = x.Precio
+                }).Take(4)
             };
             return View(vm);
         }

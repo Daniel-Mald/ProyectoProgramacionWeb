@@ -16,5 +16,9 @@ namespace BarbieQ.Repositories
         {
             return Context.Categoria.Include(x => x.Producto).Where(x => x.Id == id).FirstOrDefault();
         }
+        public Categoria? GetByNombre(string id)
+        {
+            return Context.Categoria.Include(x => x.Producto).Where(x => x.Nombre == id).FirstOrDefault();
+        }
     }
 }
