@@ -22,7 +22,7 @@
     <div class="producto-detalles">
         <h1>@Model.Nombre</h1>
         <p>@Model.Precio.ToString("c")</p>
-        <form method="post">
+        <form method="post" >
 
             <input type="hidden" name="id" value="@Model.Id" />
             <label>Cantidad</label>
@@ -40,13 +40,16 @@
         <div class="producto-descripcion">
             <h2>Descripcion del producto</h2>
             <div>
-                @Html.Raw(Model.Descripcion)
+               
+                    @Html.Raw(Model.Descripcion)
+
             </div>
         </div>
         <div class="producto-ingredientes">
             <h2>Ingredientes del producto</h2>
             <div>
-                @Model.Ingredientes
+                @Html.Raw(Model.Ingredientes)
+               
             </div>
         </div>
     </div>
