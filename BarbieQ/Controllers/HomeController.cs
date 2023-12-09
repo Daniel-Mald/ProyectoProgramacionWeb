@@ -70,6 +70,10 @@ namespace BarbieQ.Controllers
                     Precio = x.Precio
                 }).OrderBy(x => x.Nombre)
             };
+            Random r = new Random();
+
+            ViewBag.banner = r.Next(1, 6);
+
             return View(vm);
         }
         public IActionResult VerProducto(string Id)
